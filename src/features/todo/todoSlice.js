@@ -20,8 +20,11 @@ export const todoSlice = createSlice({
 
         },
         removeTodo : (state,action) => {
-            state.todos = state.todos.filter((todo) => todo.id!== action.payload) //id will be sent and if the sent id by payload matched it is filtered and then all remaining are shown
+            state.todos = state.todos.filter((todo) => todo.id !== action.payload) //id will be sent and if the sent id by payload matched it is filtered and then all remaining are shown
         },
+        updateTodo : (state,action) =>{
+
+        }
     }
  
 })

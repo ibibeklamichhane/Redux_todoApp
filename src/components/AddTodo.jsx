@@ -7,11 +7,11 @@ import {addTodo} from "../features/todo/todoSlice"
 
 function AddTodo() {
 
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState('')
     const dispatch = useDispatch()
 
     const addTodoHandler = (e) => {
-        e.PreventDefault() 
+        e.preventDefault() 
         dispatch(addTodo(input))  
 
         //input value from down is passed to aadd
@@ -30,7 +30,7 @@ function AddTodo() {
       onChange={(e) => setInput(e.target.value)}
     />
     <button
-      type="submit"
+      type="submit" 
       className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
     >
       Add Todo
