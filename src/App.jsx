@@ -6,14 +6,14 @@ import AddTodo from './components/AddTodo'
 import Todos from './components/Todos'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
       <div className='font-semibold'>
       <h1>Redux TodoApp</h1>
       <AddTodo/>
-      <Todos />
+      <Todos/>
 
 
       </div>

@@ -1,17 +1,18 @@
 import {React,useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo,updateTodo } from "../features/todo/todoSlice";
+import {removeTodo,updateTodo} from "../features/todo/todoSlice"
 
 
-function Todos() {
-  const todos = useSelector(state => state.todos); //store bata sabai todos lai lerauxa yesle
+
+function Todos({ listId }) {
+  const todoList = useSelector((state) => state.todoLists[listId] || []);  
   const dispatch = useDispatch();
   const [editText, setEditText] = useState(""); // State to hold edited text
   const [editTodoId, setEditTodoId] = useState(null);
 
 
   const handleUpdateClick = (todo) => {
-    setEditTodoId(todo.id); // Set the id of the todo being edited
+    setEditTodoId(todo.li); // Set the id of the todo being edited
     setEditText(todo.text); // Set the text of the todo being edited
   };
 
@@ -20,7 +21,7 @@ function Todos() {
     setEditText(""); // Reset the text of the todo being edited
   };
   const handleSaveClick = () => {
-    dispatch(updateTodo({ id: editTodoId, text: editText }));
+    dispatch(updateTodo({ listId, todoId: editTodoId, text: editText }));
     setEditTodoId(null); // Reset the id of the todo being edited
     setEditText(""); // Reset the text of the todo being edited
   };
@@ -34,12 +35,12 @@ function Todos() {
       <div>Todos</div>
 
       <ul className="list-none">
-        {todos.map((todo) => (
+        {todoList.map((todo) => (
           <li
             className="mt-4 flex  justify-between items-center bg-zinc-800 px-4 py-2 rounded"
             key={todo.id}
           >
-             {editTodoId === todo.id ? ( // Render edit form if editTodoId matches todo.id
+             {editTodoId === todo.id ? ( // Render edit form if editTodoId matches todo.id 
               <div>
                 <input
                   type="text"
@@ -84,7 +85,7 @@ function Todos() {
             </button>
             
             <button
-              onClick={() => dispatch(removeTodo(todo.id))}
+              onClick={() => dispatch(removeTodo({ listId, todoId: todo.id }))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
             >
               <svg

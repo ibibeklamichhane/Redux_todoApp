@@ -1,24 +1,31 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import {useDispatch} from  "react-redux";
 import {addTodo} from "../features/todo/todoSlice"
 
 //Dispatch reducer ko use garera store ma changes garxa
 
-function AddTodo() {
+function AddTodo({ listId }) {
 
     const [input, setInput] = useState('')
     const dispatch = useDispatch()
 
+// Empty dependency array to ensure this effect runs only once, when the component mounts
+
     const addTodoHandler = (e) => {
         e.preventDefault() 
-        dispatch(addTodo(input))  
+        dispatch(addTodo({ listId, text: input }));
 
         //input value from down is passed to aadd
         // action creater  ma input ki value se data pass karna ha
 
         setInput('')     //after adding the todo clear the input
-    }
+
+        // Save the added todo to local storage
+
+  
+    };
+
 
   return (
     <form onSubmit={addTodoHandler} className="space-x-3 mt-12">
